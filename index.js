@@ -10,7 +10,8 @@ client = GphApiClient('aqbm4dLmBhLELshXua8nFz2HxjU0BMHo');
 
 
 app.get('/', (req, res) => {
-    res.json({ 'message': 'this is home page' })
+    res.send('<h1> THIS IS AN UTILITY SERVER APP </h1> </br> <h1> There are three routes.</h1> <h2> The /math/add where you may add as many parameters as you want and it will send response with the sum information including result.</h2> <h2> The /math/multiply where you may add as many parameters as you want and it will send response with the product information including result.</h2> <h2> The /gif which allows you to make a search. Enter in your parameter the word of the gif you would like. This will send a response of an array of 25 URL strings.</h2>' 
+    )
 });
 
 app.get('/math/add', (req, res) => {
@@ -104,7 +105,7 @@ app.get('/gif', (req, res) => {
                 gifUrlArr.push(gifUrl)
 
             })
-            console.log(gifUrlArr)
+            //console.log(gifUrlArr)
             res.send(gifUrlArr);
         })
         .catch((err) => {
