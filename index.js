@@ -15,11 +15,13 @@ app.get('/', (req, res) => {
 
 app.get('/math/add', (req, res) => {
     console.log(req.query);
-    const input = req.query;
+    const originalInput = req.query;
     console.log(Object.values(req.query));
-    const valArr = Object.values(req.query);
+    const valArr = Object.values(originalInput);
+    const keysArr = Object.keys(originalInput);
     let sumString = '';
     const sumArr = [];
+    const input = {};
     for (let i = 0; i < valArr.length; i++) {
 
         if (isNaN(parseInt(valArr[i]))) {
@@ -30,25 +32,33 @@ app.get('/math/add', (req, res) => {
         }
 
         if (i === valArr.length - 1) {
-            sumString += `${valArr[i]} `
+            sumString += `${valArr[i]}`
         } else {
             sumString += `${valArr[i]} + `
         }
+
+        for (let j = 0; j < keysArr.length; j++) {
+            input[keysArr[j]] = parseInt(valArr[i]);
+        }
+
+        console.log(input);
     }
     console.log(sumString);
     console.log(sumArr);
-    const sum = math.add(sumArr)
-    console.log(sum)
-    res.json({ 'input': input, 'sumString': sumString, 'sum': sum })
+    const sum = math.add(sumArr);
+    console.log(sum);
+    res.json({ 'input': input, 'sumString': sumString, 'sum': sum });
 });
 
 app.get('/math/multiply', (req, res) => {
     console.log(req.query);
-    const input = req.query;
-    console.log(Object.values(req.query));
-    const valArr = Object.values(req.query);
+    const originalInput = req.query;
+    console.log(Object.values(originalInput));
+    const valArr = Object.values(originalInput);
+    const keysArr = Object.keys(originalInput);
     let productString = '';
     const productArr = [];
+    const input = {};
     for (let i = 0; i < valArr.length; i++) {
 
         if (isNaN(parseInt(valArr[i]))) {
@@ -63,12 +73,15 @@ app.get('/math/multiply', (req, res) => {
         } else {
             productString += `${valArr[i]} * `
         }
+        for (let j = 0; j < keysArr.length; j++) {
+            input[keysArr[j]] = parseInt(valArr[i]);
+        }
     }
     console.log(productString);
     console.log(productArr);
     const product = math.multiply(productArr)
-    console.log(product)
-    res.json({ 'input': input, 'productString': productString, 'product': product })
+    console.log(product);
+    res.json({ 'input': input, 'productString': productString, 'product': product });
 
 });
 
