@@ -36,12 +36,11 @@ app.get('/math/add', (req, res) => {
         } else {
             sumString += `${valArr[i]} + `
         }
-
-        for (let j = 0; j < keysArr.length; j++) {
-            input[keysArr[j]] = parseInt(valArr[i]);
+    }
+    for (let j = 0; j < sumArr.length; j++) {
+        for (let i = 0; i < keysArr.length; i++) {
+            input[keysArr[i]] = parseInt(sumArr[j++]);
         }
-
-        console.log(input);
     }
     console.log(sumString);
     console.log(sumArr);
@@ -73,8 +72,11 @@ app.get('/math/multiply', (req, res) => {
         } else {
             productString += `${valArr[i]} * `
         }
-        for (let j = 0; j < keysArr.length; j++) {
-            input[keysArr[j]] = parseInt(valArr[i]);
+
+    }
+    for (let j = 0; j < productArr.length; j++) {
+        for (let i = 0; i < keysArr.length; i++) {
+            input[keysArr[i]] = parseInt(productArr[j++]);
         }
     }
     console.log(productString);
